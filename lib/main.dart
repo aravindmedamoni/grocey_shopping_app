@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:groceyshoppingapp/second_screen.dart';
+import 'package:groceyshoppingapp/fruit_details_screen.dart';
 import 'package:groceyshoppingapp/size_config.dart';
 
 void main() {
@@ -201,7 +201,9 @@ class _FruitsState extends State<Fruits> {
                           asset: 'images/kiwi.png',
                           containerColor: Color(0xffF7DFB9),
                           topButtonColor: Color(0XffFAF0DA),
-                          onPressed: (){},
+                          onPressed: (){
+                            navigateFruitScreen(image:'images/kiwi.png',price: '₹90',fruitName:'Kiwi');
+                          },
                         ),
                         SizedBox(
                           height: 10.0,
@@ -212,7 +214,9 @@ class _FruitsState extends State<Fruits> {
                           asset: 'images/avocado.png',
                           containerColor: Color(0xffC4D4A3),
                           topButtonColor: Color(0XffE0E8CF),
-                          onPressed: (){},
+                          onPressed: (){
+                            navigateFruitScreen(image:'images/avocado.png',price: '₹120',fruitName:'Avocado');
+                          },
                         ),
                         SizedBox(
                           height: 10.0,
@@ -223,13 +227,15 @@ class _FruitsState extends State<Fruits> {
                           asset: 'images/mango.png',
                           containerColor: Color(0xffF6E475),
                           topButtonColor: Color(0XffF9EFB0),
-                          onPressed: (){},
+                          onPressed: (){
+                            navigateFruitScreen(image:'images/mango.png',price: '₹100',fruitName:'Mango');
+                          },
                         ),
                       ],
                     ),
                   ),
                   SizedBox(
-                    width: 6.0,
+                    width: 10.0,
                   ),
                   Expanded(
                     child: Column(
@@ -292,21 +298,25 @@ class _FruitsState extends State<Fruits> {
                         ),
                         SizedBox(height: 10.0,),
                         CustomCardWidget(
-                          title: 'Mango',
+                          title: 'strawberry',
                           price: '₹100',
                           asset: 'images/strawberry.png',
                           containerColor: Color(0xffF6E475),
                           topButtonColor: Color(0XffF9EFB0),
-                          onPressed: (){},
+                          onPressed: (){
+                            navigateFruitScreen(image:'images/strawberry.png',price: '₹100',fruitName:'strawberry');
+                          },
                         ),
                         SizedBox(height: 10.0,),
                         CustomCardWidget(
-                          title: 'Mango',
+                          title: 'papaya',
                           price: '₹100',
                           asset: 'images/papaya.png',
                           containerColor: Color(0xffF6E475),
                           topButtonColor: Color(0XffF9EFB0),
-                          onPressed: (){},
+                          onPressed: (){
+                            navigateFruitScreen(image:'images/papaya.png',price: '₹100',fruitName:'papaya');
+                          },
                         ),
                         SizedBox(height: 10.0,),
                       ],
@@ -319,6 +329,10 @@ class _FruitsState extends State<Fruits> {
         ],
       ),
     );
+  }
+
+  void navigateFruitScreen({image,fruitName,price}) {
+    Navigator.push(context, MaterialPageRoute(builder: (_)=>FruitDetailsScreen(image:image,fruitName: fruitName,price: price,)));
   }
 }
 
@@ -366,11 +380,14 @@ class CustomCardWidget extends StatelessWidget {
                 ),
               ),
             ),
-            Image.asset(
-              asset,
-              fit: BoxFit.contain,
-              height: 160.0,
-              width: 160.0,
+            Hero(
+              tag: asset,
+              child: Image.asset(
+                asset,
+                fit: BoxFit.contain,
+                height: 160.0,
+                width: 160.0,
+              ),
             ),
             Padding(
               padding:
